@@ -1,0 +1,23 @@
+{
+  "extends": "airbnb",
+  "globals": {
+    "__DEV__": true
+  },
+  "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true,
+      }
+  },
+  "plugins": [
+    "babel",
+    "react",
+    "react-native"
+  ],
+  "rules": {
+    "babel/generator-star-spacing": 1,
+    "no-console": 0,
+    "max-len": 0
+  }
+}
