@@ -7,8 +7,11 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "lodash": "^4.13.1",
+    "panza": "^2.3.0",
     "react": "15.1.0",
     "react-native": "0.28.0",
+    "react-native-button": "^1.6.0",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",

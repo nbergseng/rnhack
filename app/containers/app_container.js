@@ -3,8 +3,11 @@ import { NavigationExperimental, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import TabContainer from './tab_container';
-import Modal from './modal_container';
+import NewGigModal from './new_gig_modal_container';
+import Gig from './gig_container';
+
 import { navigatePush, navigatePop } from '../actions/navigation_actions';
+import Colors from '../styles/colors';
 
 const {
   Transitioner: NavigationTransitioner,
@@ -19,16 +22,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    backgroundColor: Colors.teal,
+  },
+  headerElements: {
+    color: Colors.white,
+  },
 });
 
+function isModal(routeKey) {
+  return routeKey.includes('Modal');
+}
 
 class AppContainer extends React.Component {
+  _renderHeader(props) {
+    return (
+      <NavigationHeader
+        {...props}
+        style={styles.header}
+        renderTitleComponent={p => {
+          const title = p.scene.route.title;
+          return <NavigationHeader.Title>{title}</NavigationHeader.Title>;
+        }}
+      />
+    );
+  }
   _renderScene({ scene }) {
     const { route } = scene;
 
     switch (route.key) {
-      case 'Modal':
-        return <Modal />;
+      case 'NewGigModal':
+        return <NewGigModal />;
+      case 'GigScene':
+        return <Gig gig={route.gig} />;
       default:
         return <TabContainer />;
     }
@@ -41,23 +67,15 @@ class AppContainer extends React.Component {
         navigationState={navigationState}
         style={styles.outerContainer}
         onNavigate={onNavigate}
-        renderOverlay={props => (
-          <NavigationHeader
-            {...props}
-            renderTitleComponent={p => {
-              const title = p.scene.route.title;
-              return <NavigationHeader.Title>{title}</NavigationHeader.Title>;
-            }}
-          />
-        )}
+        renderOverlay={this._renderHeader}
         renderScene={props => (
           <NavigationCard
             {...props}
-            style={props.scene.route.key === 'Modal' ?
+            style={isModal(props.scene.route.key) ?
                   NavigationCard.CardStackStyleInterpolator.forVertical(props) :
                   undefined
             }
-            panHandlers={props.scene.route.key === 'Modal' ? null : undefined}
+            panHandlers={isModal(props.scene.route.key) ? null : undefined}
             renderScene={this._renderScene}
             key={props.scene.route.key}
           />

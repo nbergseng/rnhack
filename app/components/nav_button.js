@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 const NavButton = (props) => (
   <TouchableOpacity style={styles.button} onPress={props.buttonHandler}>
-    <Text style={styles.label}>Go to {props.destLabel} Page</Text>
+    <Text style={styles.label}>Go to {props.destLabel}</Text>
   </TouchableOpacity>
 );
 

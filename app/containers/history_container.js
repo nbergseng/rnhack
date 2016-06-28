@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
-import ModalScreen from '../components/modal_screen';
-import { navigatePop } from '../actions/navigation_actions';
+import HistoryScreen from '../scenes/history_scene';
 
 const mapStateToProps = (state) => {
   return {
@@ -9,12 +8,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onButtonPress: () => {
-    dispatch(navigatePop());
-  },
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ModalScreen);
+)(HistoryScreen);

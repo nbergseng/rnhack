@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 
-import { StatusBarIOS, TabBarIOS, View } from 'react-native';
+import { StatusBarIOS, TabBarIOS } from 'react-native';
 import Gigs from './gigs_container';
-import Work from './work_container';
+import History from './history_container';
 import Invoices from './invoices_container';
 
 import Colors from '../styles/colors';
@@ -42,7 +42,7 @@ class TabContainer extends Component {
           iconName="access-time"
           selectedIconName="access-time"
         >
-          <Work />
+          <History />
         </Icon.TabBarItem>
         <Icon.TabBarItem
           selected={this.props.tab === 'invoices'}

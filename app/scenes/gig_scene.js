@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2F9CB2',
+    backgroundColor: '#79BD8F',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const GigsScreen = () => (
+const GigScreen = ({ gig }) => (
   <View style={styles.container}>
-    <Text style={styles.title}>Gigs</Text>
+    <Text style={styles.title}>{gig.name}</Text>
   </View>
 );
 
-GigsScreen.propTypes = {
+GigScreen.propTypes = {
+  gig: PropTypes.object.isRequired,
 };
 
-export default GigsScreen;
+export default GigScreen;

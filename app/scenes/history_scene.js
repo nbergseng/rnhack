@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import NavButton from './nav_button';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#cea76a',
+    backgroundColor: '#D690CB',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -18,16 +16,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const ModalScreen = (props) => (
+const HistoryScreen = () => (
   <View style={styles.container}>
-    <Text style={styles.title}>This is a Modal</Text>
-
-    <NavButton destLabel="Work" buttonHandler={props.onButtonPress} />
+    <Text style={styles.title}>History</Text>
   </View>
 );
 
-ModalScreen.propTypes = {
-  onButtonPress: PropTypes.func.isRequired,
+HistoryScreen.propTypes = {
 };
 
-export default ModalScreen;
+export default HistoryScreen;

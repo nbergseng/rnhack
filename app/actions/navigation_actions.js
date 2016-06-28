@@ -7,10 +7,10 @@ export const NAV_RESET = 'NAV_RESET';
 export const SWITCH_TAB = 'SWITCH_TAB';
 
 export function navigatePush(state) {
-  state = typeof state === 'string' ? { key: state, title: state } : state;
+  const objectifiedState = typeof state === 'string' ? { key: state, title: state } : state;
   return {
     type: NAV_PUSH,
-    state,
+    state: objectifiedState,
   };
 }
 

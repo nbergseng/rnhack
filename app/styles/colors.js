@@ -1,8 +1,12 @@
 export default {
-  actionText: '#3FB4CF',
-  inactiveText: '#9B9B9B',
+  okBlue: '#03a9f4',
+  actionText: '#3fb4cf',
+  inactiveText: '#9b9b9b',
   darkText: '#032250',
-  lightText: '#7F91A7',
-  cellBorder: '#EEEEEE',
-  darkBackground: '#183E63',
+  lightText: '#7f91a7',
+  cellBorder: '#eeeeee',
+  darkBackground: '#183e63',
+  grayBackground: '#eee',
+  white: '#ffffff',
+  teal: '#2f9cb2',
 };

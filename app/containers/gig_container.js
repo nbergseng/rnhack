@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 
-import InvoicesScreen from '../scenes/invoices_scene';
+import GigScreen from '../scenes/gig_scene';
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
+const mapStateToProps = ({ gigsState }, { gig }) => ({
+  gig: gigsState.entities[gig],
+});
 
 const mapDispatchToProps = (dispatch) => ({
 });
@@ -13,4 +12,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(InvoicesScreen);
+)(GigScreen);
