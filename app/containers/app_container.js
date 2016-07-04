@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { NavigationExperimental, StyleSheet } from 'react-native';
+import { NavigationExperimental, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import TabContainer from './tab_container';
@@ -15,12 +15,15 @@ const {
   Header: NavigationHeader,
 } = NavigationExperimental;
 
+const navHeight = 64; // TODO: temp
+
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
   },
   container: {
     flex: 1,
+    marginTop: navHeight,
   },
   header: {
     backgroundColor: Colors.teal,
@@ -42,7 +45,7 @@ class AppContainer extends React.Component {
         style={styles.header}
         renderTitleComponent={p => {
           const title = p.scene.route.title;
-          return <NavigationHeader.Title>{title}</NavigationHeader.Title>;
+          return <NavigationHeader.Title textStyle={styles.headerElements}>{title}</NavigationHeader.Title>;
         }}
       />
     );
@@ -54,7 +57,7 @@ class AppContainer extends React.Component {
       case 'NewGigModal':
         return <NewGigModal />;
       case 'GigScene':
-        return <Gig gig={route.gig} />;
+        return <Gig gigId={route.gigId} />;
       default:
         return <TabContainer />;
     }
@@ -76,7 +79,9 @@ class AppContainer extends React.Component {
                   undefined
             }
             panHandlers={isModal(props.scene.route.key) ? null : undefined}
-            renderScene={this._renderScene}
+            renderScene={() => // TODO figure out a better way to do this stupid header padding
+              <View style={styles.container}>{this._renderScene(props)}</View>
+            }
             key={props.scene.route.key}
           />
         )}

@@ -9,4 +9,10 @@ export default {
   grayBackground: '#eee',
   white: '#ffffff',
   teal: '#2f9cb2',
+  paleGreen: '#79BD8F',
+  darkGray: '#50514f',
+  paleRed: '#f25f5c',
+  paleYellow: '#ffe066',
+  paleBlue: '#247ba0',
+  paleTeal: '#70c1b3',
 };

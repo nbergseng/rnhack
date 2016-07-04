@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import navigationState from './navigation_reducer';
-import gigsState from './gigs_reducer';
+import gigs from './gigs_reducer';
+import sessions from './sessions_reducer';
 
 const appReducers = combineReducers({
   navigationState,
-  gigsState,
+  gigs,
+  sessions,
 });
 
 export default appReducers;

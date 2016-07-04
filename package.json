@@ -4,19 +4,26 @@
   "private": true,
   "scripts": {
     "bundle": "node node_modules/react-native/local-cli/cli.js bundle",
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "reactotron": "node_modules/.bin/reactotron"
   },
   "dependencies": {
     "lodash": "^4.13.1",
+    "moment": "^2.13.0",
+    "moment-duration-format": "^1.3.0",
+    "node-uuid": "^1.4.7",
     "panza": "^2.3.0",
     "react": "15.1.0",
     "react-native": "0.28.0",
+    "react-native-action-button": "^1.1.7",
     "react-native-button": "^1.6.0",
     "react-native-vector-icons": "^2.0.3",
     "react-redux": "^4.4.5",
+    "realm": "^0.14.1",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-loop": "^2.1.1"
+    "redux-loop": "^2.1.1",
+    "redux-persist": "^3.2.2"
   },
   "devDependencies": {
     "eslint": "^2.13.1",
@@ -25,6 +32,7 @@
     "eslint-plugin-import": "^1.9.2",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-react-native": "^1.1.0"
+    "eslint-plugin-react-native": "^1.1.0",
+    "reactotron": "^0.6.1"
   }
 }

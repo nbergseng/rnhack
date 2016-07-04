@@ -1,18 +1,14 @@
 import React, { PropTypes } from 'react';
 import { View, Text, StyleSheet, ListView } from 'react-native';
 import { Button } from 'react-native-vector-icons/MaterialIcons';
-import _ from 'lodash';
 import Colors from '../styles/colors';
 
 import { Separator, TouchableRow } from 'panza';
-
-const navHeight = 45; // TODO: temp
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.grayBackground,
-    marginTop: navHeight,
     marginBottom: 50,
   },
   spacer: {
@@ -39,8 +35,7 @@ const ds = new ListView.DataSource({
 });
 
 function GigsScreen({ gigs, onModalButtonPress, onRowPress }) {
-  const rows = _.map(gigs, (gig) => gig);
-  const dataSource = ds.cloneWithRows(rows);
+  const dataSource = ds.cloneWithRows(gigs);
 
   return (
     <View style={styles.container}>
@@ -49,7 +44,12 @@ function GigsScreen({ gigs, onModalButtonPress, onRowPress }) {
         style={styles.list}
         renderSeparator={(a, b) => <Separator key={a + b} />}
         renderRow={(rowData) => (
-          <TouchableRow style={styles.listRow} key={rowData.name} primaryText={rowData.name} onPress={() => onRowPress(rowData.name)} />
+          <TouchableRow
+            style={styles.listRow}
+            key={rowData.id}
+            primaryText={rowData.name}
+            onPress={() => onRowPress(rowData.id, rowData.name)}
+          />
         )}
       />
       <View style={styles.spacer}>

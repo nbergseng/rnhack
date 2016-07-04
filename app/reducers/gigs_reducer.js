@@ -1,9 +1,20 @@
 import _ from 'lodash';
 import { CREATE_GIG, UPDATE_GIG, DESTROY_GIG } from '../actions/gigs_actions';
+import { updateStateEntities } from '../utils/reducer_utils';
 
-function gigState(state = {
+function createGig(entities, { id, name }) {
+  return _.assign({}, entities, {
+    [id]: {
+      id,
+      name,
+    },
+  });
+}
+
+function gigs(state = {
   entities: {
-    nike: {
+    testId: {
+      id: 'testId',
       name: 'nike',
       tags: [],
       foo: 'bar',
@@ -12,15 +23,14 @@ function gigState(state = {
 }, action) {
   switch (action.type) {
     case CREATE_GIG:
-      return _.merge({}, state, { entities: { [action.gig.name]: { name: action.gig.name } } });
+      return updateStateEntities(state, action, createGig);
     case UPDATE_GIG:
       return state;
     case DESTROY_GIG:
       return state;
-
     default:
       return state;
   }
 }
 
-export default gigState;
+export default gigs;
