@@ -12,14 +12,7 @@ function createGig(entities, { id, name }) {
 }
 
 function gigs(state = {
-  entities: {
-    testId: {
-      id: 'testId',
-      name: 'nike',
-      tags: [],
-      foo: 'bar',
-    },
-  },
+  entities: {},
 }, action) {
   switch (action.type) {
     case CREATE_GIG:

@@ -38,22 +38,40 @@ const styles = StyleSheet.create({
 });
 
 const ds = new ListView.DataSource({
+  sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
 const GigScreen = ({
   gig,
   sessions,
-  activeSession,
   startNewSession,
   stopSession,
 }) => {
-  const dataSource = ds.cloneWithRows(sessions);
-
+  const [activeSession, inactiveSessions] = [sessions.true || [], sessions.false || []];
+  const dataSource = ds.cloneWithRowsAndSections({ active: activeSession, ended: inactiveSessions });
+  const hasActiveSession = !_.isEmpty(activeSession);
+  // TODO: props.children acting up when this is inlined
+  let actionButtonItem;
+  if (hasActiveSession) {
+    actionButtonItem = (
+      <ActionButton.Item buttonColor="#9b59b6" title="Stop" onPress={() => stopSession(activeSession[0].id)}>
+        <Icon name="pan-tool" style={styles.actionButtonIcon} />
+      </ActionButton.Item>
+    );
+  } else {
+    actionButtonItem = (
+      <ActionButton.Item buttonColor="#1abc9c" title="Start" onPress={() => startNewSession(gig.id)}>
+        <Icon name="star" style={styles.actionButtonIcon} />
+      </ActionButton.Item>
+    );
+  }
   return (
     <View style={styles.container}>
       {_.isEmpty(sessions) &&
-        <Text style={styles.title}>No sessions for this Gig.  Start one with the button below!</Text>
+        <Text style={styles.title}>
+          No sessions for this Gig.  Start one with the button below!
+        </Text>
       }
       <ListView
         dataSource={dataSource}
@@ -63,12 +81,7 @@ const GigScreen = ({
         style={styles.list}
       />
       <ActionButton buttonColor={Colors.paleRed}>
-        <ActionButton.Item buttonColor="#9b59b6" title="Stop" onPress={() => stopSession()}>
-          <Icon name="pan-tool" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
-        <ActionButton.Item buttonColor="#1abc9c" title="Start" onPress={() => startNewSession(gig.id)}>
-          <Icon name="star" style={styles.actionButtonIcon} />
-        </ActionButton.Item>
+        {actionButtonItem}
       </ActionButton>
     </View>
   );
@@ -76,8 +89,7 @@ const GigScreen = ({
 
 GigScreen.propTypes = {
   gig: PropTypes.object.isRequired,
-  sessions: PropTypes.array.isRequired,
-  activeSession: PropTypes.object,
+  sessions: PropTypes.object.isRequired,
   startNewSession: PropTypes.func.isRequired,
   stopSession: PropTypes.func.isRequired,
 };

@@ -40,6 +40,7 @@ function GigsScreen({ gigs, onModalButtonPress, onRowPress }) {
   return (
     <View style={styles.container}>
       <ListView
+        enableEmptySections
         dataSource={dataSource}
         style={styles.list}
         renderSeparator={(a, b) => <Separator key={a + b} />}

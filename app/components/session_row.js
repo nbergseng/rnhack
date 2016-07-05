@@ -7,8 +7,6 @@ import { formattedDuration } from '../utils/time_utils';
 import Colors from '../styles/colors';
 
 import { TouchableRowCell, Base, PrimaryText, SecondaryText } from 'panza';
-// import 'fbjs/lib/emptyFunction';
-// import SwipeableRow from 'SwipeableRow';
 
 const styles = StyleSheet.create({
   listRow: {
