@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
+import isEmpty from 'lodash/fp/isEmpty';
 import { View, StyleSheet } from 'react-native';
 
 import Colors from '../styles/colors';
@@ -44,7 +44,7 @@ class NewGigModalScreen extends Component {
           />
         </InputGroup>
         <Button
-          disabled={_.isEmpty(this.state.name)}
+          disabled={isEmpty(this.state.name)}
           onPress={() => onCreateGigPress(this.state)}
         >
           Save

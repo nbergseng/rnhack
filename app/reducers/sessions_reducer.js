@@ -1,4 +1,8 @@
-import _ from 'lodash';
+import flow from 'lodash/fp/flow';
+import map from 'lodash/fp/map';
+import keyBy from 'lodash/fp/keyBy';
+
+import { REHYDRATE } from 'redux-persist/constants';
 import {
   CREATE_SESSION,
   PAUSE_SESSION,
@@ -7,12 +11,14 @@ import {
   UPDATE_SESSION,
   DESTROY_SESSION,
 } from '../actions/sessions_actions';
+
 import { updateStateEntities } from '../utils/reducer_utils';
 
 // TODO: clean up with immutables
 function createSession(entities, { id, startTime, gigId }) {
   // TODO: existing active session check
-  return _.assign({}, entities, {
+  return {
+    ...entities,
     [id]: {
       id,
       startTime,
@@ -20,22 +26,32 @@ function createSession(entities, { id, startTime, gigId }) {
       isActive: true,
       isPaused: false,
       pauseDuration: 0,
-    },
-  });
+    }
+  };
 }
 
 function endSession(entities, { id, endTime }) {
-  return _.assign({}, entities, {
-    [id]: _.assign(
-      {},
-      entities[id],
-      {
-        endTime,
-        isActive: false,
-        isPaused: false,
-      }
-    ),
-  });
+  return {
+    ...entities,
+    [id]: {
+      ...entities[id],
+      endTime,
+      isActive: false,
+      isPaused: false,
+    },
+  };
+}
+
+function rehydrateSessionEntities(sessions) {
+  // gotta de-stringify ze date objects
+  return flow(
+    map((session) => ({
+      ...session,
+      startTime: new Date(session.startTime),
+      endTime: new Date(session.endTime),
+    })),
+    keyBy('id')
+  )(sessions);
 }
 
 function sessions(state = { entities: {} }, action) {
@@ -53,7 +69,15 @@ function sessions(state = { entities: {} }, action) {
       return state;
     case DESTROY_SESSION:
       return state;
-
+    case REHYDRATE:
+      const incoming = action.payload.sessions.entities;
+      if (incoming) {
+        return {
+          ...state,
+          entities: rehydrateSessionEntities(incoming),
+        };
+      }
+      return state;
     default:
       return state;
   }

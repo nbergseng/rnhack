@@ -23,3 +23,8 @@ export const getActiveSessionForGig = createSelector(
   getSessionsForGig,
   (sessions) => filter({ isActive: true })(sessions)
 );
+
+export const getSessionsByGig = createSelector(
+  getSessions,
+  (sessions) => groupBy('gigId')(sessions)
+);

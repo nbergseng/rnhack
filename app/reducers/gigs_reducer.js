@@ -1,14 +1,15 @@
-import _ from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';
 import { CREATE_GIG, UPDATE_GIG, DESTROY_GIG } from '../actions/gigs_actions';
 import { updateStateEntities } from '../utils/reducer_utils';
 
 function createGig(entities, { id, name }) {
-  return _.assign({}, entities, {
+  return {
+    ...entities,
     [id]: {
       id,
       name,
     },
-  });
+  };
 }
 
 function gigs(state = {
@@ -20,6 +21,15 @@ function gigs(state = {
     case UPDATE_GIG:
       return state;
     case DESTROY_GIG:
+      return state;
+    case REHYDRATE:
+      const incoming = action.payload.gigs;
+      if (incoming) {
+        return {
+          ...state,
+          ...incoming,
+        };
+      }
       return state;
     default:
       return state;

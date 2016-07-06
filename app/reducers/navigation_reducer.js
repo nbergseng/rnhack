@@ -1,5 +1,7 @@
 import * as NavigationStateUtils from 'NavigationStateUtils';
 
+import { REHYDRATE } from 'redux-persist/constants';
+
 import { NAV_PUSH, NAV_POP, NAV_JUMP_TO_KEY, NAV_JUMP_TO_INDEX, NAV_RESET, SWITCH_TAB } from '../actions/navigation_actions';
 
 function navigationState(state = {
@@ -37,6 +39,9 @@ function navigationState(state = {
         ...state,
         tab: action.tab,
       };
+    case REHYDRATE:
+      // TODO: handle returning to same scene in app
+      return state;
 
     default:
       return state;

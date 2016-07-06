@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isEmpty from 'lodash/fp/isEmpty';
 import React, { PropTypes } from 'react';
 
 import { View, Text, StyleSheet, ListView } from 'react-native';
@@ -50,7 +50,7 @@ const GigScreen = ({
 }) => {
   const [activeSession, inactiveSessions] = [sessions.true || [], sessions.false || []];
   const dataSource = ds.cloneWithRowsAndSections({ active: activeSession, ended: inactiveSessions });
-  const hasActiveSession = !_.isEmpty(activeSession);
+  const hasActiveSession = !isEmpty(activeSession);
   // TODO: props.children acting up when this is inlined
   let actionButtonItem;
   if (hasActiveSession) {
@@ -68,7 +68,7 @@ const GigScreen = ({
   }
   return (
     <View style={styles.container}>
-      {_.isEmpty(sessions) &&
+      {isEmpty(sessions) &&
         <Text style={styles.title}>
           No sessions for this Gig.  Start one with the button below!
         </Text>
